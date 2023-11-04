@@ -31,7 +31,6 @@ class StoreUpdateContatoFormRequest extends FormRequest
                 'string',
                 'max:4',
                 'min:4',
-                'unique:contatos',
                 Rule::unique('contatos')->ignore($this->id, 'id'),
 
             ],

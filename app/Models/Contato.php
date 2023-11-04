@@ -24,8 +24,12 @@ class Contato extends Model
             if ($search) {
                 $query->where('ramal', $search);
                 $query->orwhere('name', 'LIKE', "%{$search}%"); 
+                $query->orwhere('instituto', 'LIKE', "%{$search}%"); 
+                $query->orwhere('coordenacao', 'LIKE', "%{$search}%"); 
+
+
           }
-        })->paginate(5);
+        })->paginate(10);
 
         return $contatos;
     }

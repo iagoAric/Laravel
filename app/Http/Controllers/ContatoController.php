@@ -18,24 +18,24 @@ class ContatoController extends Controller
     public function index(Request $request)
     {
         $contatos = $this->model
-                ->getContatos(
-                    search: $request->seach ?? ''
-                );
+            ->getContatos(
+                search: $request->search ?? ''
+            );
 
-        return view('contatos.index',compact('contatos'));
-    }  
+        return view('contatos.index', compact('contatos'));
+    }
 
     public function show($id)
     {
         //$contato = Contato::where('id', $id)->first();
-        if (!$contato =$this->model->find($id))
+        if (!$contato = $this->model->find($id))
 
             return redirect()->route('contatos.index');
-        
-        return view('contatos.show', compact('contato'));
-   }
 
-   public function create()
+        return view('contatos.show', compact('contato'));
+    }
+
+    public function create()
     {
         return view('contatos.create');
     }
@@ -47,7 +47,7 @@ class ContatoController extends Controller
         $data = $request->all();
 
         $contatos = Contato::create($data);
-        
+
         return redirect()->route('contatos.index');
     }
 
@@ -55,7 +55,7 @@ class ContatoController extends Controller
     {
         if (!$contato = Contato::find($id))
 
-        return redirect()->route('contatos.index');
+            return redirect()->route('contatos.index');
 
         return view('contatos.edit', compact('contato'));
     }
@@ -65,25 +65,20 @@ class ContatoController extends Controller
         if (!$contato = Contato::find($id))
             return redirect()->route('contatos.index');
 
-         $data =$request->only('name', 'ramal');   
+        $data = $request->only('ramal', 'name');
 
-         $contato->update($data);
+        $contato->update($data);
 
         return redirect()->route('contatos.index');
     }
 
-   public function destroy($id)
+    public function destroy($id)
     {
         if (!$contato = Contato::find($id))
-                return redirect()->Route('contatos.index');
+            return redirect()->Route('contatos.index');
 
         $contato->delete();
-        
+
         return redirect()->Route('contatos.index');
     }
-
-            
 }
-
-
-
